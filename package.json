@@ -3,12 +3,16 @@
   "version": "0.0.0",
   "dependencies": {},
   "devDependencies": {
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browserify-shim": "^3.8.0",
     "del": "~0.1.3",
     "gulp": "~3.8.8",
     "gulp-autoprefixer": "~1.0.1",
     "gulp-bower": "0.0.6",
     "gulp-cache": "~0.2.4",
-    "gulp-imagemin": "latest",
+    "gulp-imagemin": "^2.4.0",
     "gulp-jade": "~0.8.0",
     "gulp-jest": "~0.2.2",
     "gulp-jshint": "~1.8.5",
@@ -17,32 +21,39 @@
     "gulp-size": "~1.1.0",
     "gulp-useref": "~0.4.4",
     "gulp-util": "~3.0.1",
-    "gulp-webserver": "latest",
-    "jest": "latest",
-    "react": "latest",
-    "reactify": "latest",
-    "watchify": "~2.1",
-    "browserify-shim": "^3.8.0",
-    "vinyl-source-stream": "^1.0.0"
+    "gulp-webserver": "^0.9.1",
+    "history": "^1.17.0",
+    "jest": "^0.1.40",
+    "lodash": "^4.0.1",
+    "main-bower-files": "^2.11.1",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-router": "^1.0.3",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "~2.1"
   },
   "engines": {
     "node": ">=0.10.0"
   },
   "browserify": {
-      "transform": [
-          "browserify-shim",
-          [
-            "reactify",
-            {
-                "es6": true
-            }
-          ]
+    "extension": [
+      "jsx"
+    ],
+    "transform": [
+      "browserify-shim",
+      [
+        "reactify",
+        {
+          "es6": true
+        }
       ]
+    ]
   },
   "browser": {
-      "jquery": "./app/bower_components/jquery/dist/jquery.js"
+    "jquery": "./src/vendor/jquery/dist/jquery.js"
   },
   "browserify-shim": {
-      "jquery": "$"
+    "jquery": "$"
   }
 }
