@@ -128,7 +128,7 @@ gulp.task('extras', function () {
 });
 
 // Watch
-gulp.task('watch', ['html', 'bundle', 'images', 'serve'], function () {
+gulp.task('watch', ['build', 'serve'], function () {
 
     // Watch .json files
     gulp.watch('src/**/*.json', ['json']);
