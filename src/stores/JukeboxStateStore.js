@@ -28,19 +28,6 @@ export function getActivePlaylist() {
     return playlists[activePlaylistIndex];
 }
 
-export function bumpTrack(inc) {
-    let listLength = getActivePlaylist();
-    let newIndex = activeTrackIndex + inc;
-
-    if (newIndex < 0) {
-        activeTrackIndex = listLength - 1;
-    } else if (newIndex > listLength) {
-        activeTrackIndex = 0;
-    } else {
-        activeTrackIndex += inc;
-    }
-}
-
 export function isPlaying() {
     return playing;
 }
