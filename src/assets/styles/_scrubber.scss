@@ -1,0 +1,20 @@
+.scrubber-container {
+    display: flex;
+    order: 2;
+
+    .progress-bg {
+        cursor: pointer;
+        flex: 1;
+        height: 11px;
+        background-color: #19191B;
+        margin: 0 20px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .progress-curr {
+        background-color: #0BEDED;
+        height: 100%;
+        transition: 0.1s width;
+    }
+}

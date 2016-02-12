@@ -1,3 +1,5 @@
+import * as SoundCloud from './SoundCloudWrapper';
+
 /*
  * Responsible for taking Soundcloud JSON data and generating
  * playlist and track objects
@@ -10,13 +12,20 @@ function trackFactory(track) {
     const genre = track.genre;
     const tags = track.tag_list;
     const username = track.user.username;
+    const duration = track.duration;
+
+    function getStreamUrl() {
+        return SoundCloud.getStreamUrl(id);
+    }
 
     return {
         id,
+        getStreamUrl,
         title,
         artwork,
         genre,
         tags,
+        duration,
         username
     };
 }

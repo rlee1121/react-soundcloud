@@ -1,0 +1,68 @@
+.display {
+    display: flex;
+    order: 2;
+
+    .artwork {
+        width: 100px;
+        height: 100px;
+        border: 2px solid rgba(255,255,255,0.5);
+        margin-right: 25px;
+        order: 1;
+        background-size: cover;
+        background-position: center;
+    }
+    .display-info {
+        order: 2;
+        display: flex;
+        flex-direction: column;
+    }
+    .record {
+        float: left;
+        height: 15px;
+        width: 15px;
+        background-size: cover;
+        margin-right: 5px;
+        background-image: url('../img/record.png');
+    }
+    .record.playing {
+        animation: rotating 4s linear infinite;
+    }
+
+    .is-playing {
+        order: 1;
+        font-size: 11px;
+        margin-bottom: 20px;
+    }
+    .empty-song {
+        order: 2;
+        font-size: 25px;
+        color: rgb(120,120,120);
+    }
+    .song-metadata {
+        order: 3;
+        display: flex;
+        flex-direction: column;
+    }
+    .song-metadata .title{
+        order: 1;
+        margin-bottom: 10px;
+        font-size: 31px;
+        line-height: 31px;
+    }
+    .song-metadata .username{
+        order: 2;
+        color: #0BEDED;
+        font-size: 18px;
+    }
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Display } from './Display';
 import { Controls } from './Controls';
+import { Audio } from './Audio';
+import { Scrubber } from './Scrubber';
 import * as JukeboxController from '../services/JukeboxController';
 
 export let SCPlayer = React.createClass({
@@ -13,14 +15,16 @@ export let SCPlayer = React.createClass({
 
     getInitialState() {
         return {
-            loading: false
+            time: 0,
+            scrubTime: 0
         };
     },
 
-    shouldComponentUpdate(nextProps) {
+    shouldComponentUpdate(nextProps, nextState) {
         return (
             nextProps.activeTrack !== this.props.activeTrack ||
-            nextProps.isPlaying !== this.props.isPlaying
+            nextProps.isPlaying !== this.props.isPlaying ||
+            nextState.time !== this.state.time
         );
     },
 
@@ -40,6 +44,15 @@ export let SCPlayer = React.createClass({
         JukeboxController.next();
     },
 
+    onTimeUpdate(evt) {
+        let player = evt.target;
+        this.setState({ time: player.currentTime || 0 });
+    },
+
+    onScrub(time) {
+        this.setState({ scrubTime: time });
+    },
+
     getBackgroundImage(song) {
         if (song) {
             return `url('${song.artwork}')`;
@@ -49,6 +62,9 @@ export let SCPlayer = React.createClass({
     },
 
     render() {
+        let { activeTrack, isPlaying } = this.props;
+        let duration = activeTrack ? activeTrack.duration : 0;
+
         return (
             <div className=''>
                 <div
@@ -63,16 +79,28 @@ export let SCPlayer = React.createClass({
                 <div className='player-main' ref='playerContainer'>
 
                     <Display
-                        track={this.props.activeTrack}
-                        isPlaying={this.props.isPlaying}
+                        track={activeTrack}
+                        isPlaying={isPlaying}
                     />
                     <Controls
-                        ready={this.props.activeTrack}
-                        isPlaying={this.props.isPlaying}
+                        ready={activeTrack}
+                        isPlaying={isPlaying}
                         onPlay={this.play}
                         onPrev={this.prev}
                         onPause={this.pause}
                         onNext={this.next}
+                    />
+                    <Audio
+                        track={activeTrack}
+                        scrubTime={this.state.scrubTime}
+                        isPlaying={isPlaying}
+                        onTrackEnd={this.next}
+                        onTimeUpdate={this.onTimeUpdate}
+                    />
+                    <Scrubber
+                        time={this.state.time}
+                        duration={duration / 1000}
+                        onScrub={this.onScrub}
                     />
 
                 </div>

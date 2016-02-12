@@ -32,3 +32,7 @@ export function stream(id) {
         });
     });
 }
+
+export function getStreamUrl(id) {
+    return `https://api.soundcloud.com/tracks/${id}/stream?client_id=${SC_CLIENT_ID}`;
+}

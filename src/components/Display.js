@@ -1,6 +1,13 @@
 import React from 'react';
 
 export let Display = React.createClass({
+    shouldComponentUpdate(nextProps, nextState) {
+        return (
+            nextProps.track !== this.props.track ||
+            nextProps.isPlaying !== this.props.isPlaying
+        );
+    },
+
     getBackgroundImage(track) {
         if (track) {
             return `url('${track.artwork}')`;
