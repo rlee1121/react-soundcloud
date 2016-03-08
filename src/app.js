@@ -1,54 +1,49 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { SCPlayer } from './components/SCPlayer';
-import * as JukeboxController from './services/JukeboxController';
-import * as Preloader from './services/Preloader';
+import { LoginView } from './components/LoginView';
+import { MainView } from './components/MainView';
+import * as SoundCloud from './services/SoundCloudWrapper';
 
 let App = React.createClass({
     getInitialState() {
         return {
-            activeTrack: null,
-            isPlaying: false
+            loggedInUser: null,
+            initialized: false
         };
     },
 
     componentWillMount() {
-        JukeboxController.Dispatcher.on(JukeboxController.Events.RESET, this.onReset);
-        JukeboxController.Dispatcher.on(JukeboxController.Events.PLAY, this.updateActiveTrack);
-        JukeboxController.Dispatcher.on(JukeboxController.Events.PAUSE, this.updateActiveTrack);
-        JukeboxController.Dispatcher.on(JukeboxController.Events.NEXT, this.updateActiveTrack);
-        JukeboxController.Dispatcher.on(JukeboxController.Events.PREV, this.updateActiveTrack);
-    },
+        SoundCloud.init().then((user) => {
+            if (user) {
+                this.onLogin(user);
+            }
 
-    componentDidMount() {
-        JukeboxController.init('rl33');
-    },
-
-    updateActiveTrack() {
-        this.setState({
-            activeTrack: JukeboxController.getActiveTrack(),
-            isPlaying: JukeboxController.isPlaying()
+            this.setState({ initialized: true });
         });
     },
 
-    onReset() {
-        let loadImagePromises = JukeboxController.getActivePlaylist().tracks
-            .map((track) => track.artwork)
-            .map(Preloader.loadImage);
+    onLogin(user) {
+        this.setState({ loggedInUser: user });
+    },
 
-        Promise.all(loadImagePromises)
-            .then(() => {
-                this.updateActiveTrack();
-            });
+    renderMain() {
+        if (!this.state.initialized) {
+            return <h1>LOADING!</h1>;
+        } else if (!this.state.loggedInUser) {
+            return (
+                <LoginView onLogin={this.onLogin} />
+            );
+        }
+
+        return (
+            <MainView user={this.state.loggedInUser} />
+        );
     },
 
     render() {
         return (
             <div>
-                <SCPlayer
-                    activeTrack={this.state.activeTrack}
-                    isPlaying={this.state.isPlaying}
-                />
+                { this.renderMain() }
             </div>
         );
     }

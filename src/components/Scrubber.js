@@ -33,7 +33,7 @@ export let Scrubber = React.createClass({
                 <div className="curr-time">{ this.displayTime() }</div>
                 <div
                     className="progress-bg"
-                    onClick={this.scrub}
+                    onMouseDown={this.scrub}
                 >
                     <div
                         className="progress-curr"

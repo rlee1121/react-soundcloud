@@ -1,43 +1,32 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
-@import './_display.scss';
-@import './_controls.scss';
-@import './_scrubber.scss';
+@import 'vars';
+@import 'display';
+@import 'controls';
+@import 'scrubber';
+@import 'login';
+@import 'home';
+@import 'player';
 
 
 body {
     color: white;
     margin: 0;
-    font-family: 'Open Sans';
+    font-family: $main-font;
 }
 p {
     margin: 0;
 }
-.player-bg {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    background-size: cover;
-    background-color: #111;
-    background-position: center;
-    filter: blur(15px);
+.main-view {
+    background-color: #2a2b2d;
 }
-.overlay {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    background-color: rgba(0,0,0,0.7);
-}
-.player-main {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    display: flex;
-    flex-direction: column;
+.container {
+    width: 1190px;
+    margin: 0 auto;
 }
 
-.playlist-nav {
-    position: fixed;
+@media (max-width : 1190px) {
+/* Styles */
+    .container {
+        width: 100%;
+    }
 }

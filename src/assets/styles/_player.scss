@@ -1,0 +1,41 @@
+.player-container {
+    position: fixed;
+    z-index: 999;
+    height: 42px;
+    width: 100%;
+    bottom: 0;
+    background-size: cover;
+    background-color: #ddd;
+    background-position: center;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    // filter: blur(15px);
+
+    .overlay {
+        // position: absolute;
+        // height: 100%;
+        // width: 100%;
+        // top: 0;
+        // background-color: rgba(0,0,0,0.7);
+    }
+    // .player-main, .player-container {
+    //     // position: absolute;
+    //     // height: 100%;
+    //     // width: 100%;
+    //     // top: 0;
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-content: space-around;
+    // }
+
+    .player-main {
+        flex-direction: row;
+        display: flex;
+        flex: 1;
+    }
+
+    .playlist-nav {
+        position: fixed;
+    }
+}

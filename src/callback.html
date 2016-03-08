@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+</head>
+<body onload="window.onLoadedCallback">
+    <h1>Test!!!</h1>
+
+    <script type="text/javascript">
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+        var code = getParameterByName('code'); // "lorem"
+        var bar = getParameterByName('state'); // "" (present with empty value)
+        var baz = getParameterByName('scope'); // "" (present with no value)
+
+        localStorage.setItem('SC_TEST_TOKEN', code);
+
+        var onLoadedCallback = window.setTimeout(window.opener.SC.connectCallback, 1);
+    </script>
+</body>
+</html>

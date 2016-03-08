@@ -2,9 +2,9 @@
  * 
  */
 
-import * as SoundCloud from './SoundCloudWrapper';
+// import * as SoundCloud from './SoundCloudWrapper';
 import * as JukeboxStateStore from '../stores/JukeboxStateStore';
-import { parse } from './DataFactory';
+// import { parse } from './DataFactory';
 import events from 'events';
 
 export let Dispatcher = new events.EventEmitter();
@@ -67,15 +67,9 @@ export function prev() {
     Dispatcher.emit(Events.PREV);
 }
 
-// Initializes soundcloud sdk
-export function init(username) {
-    SoundCloud.init();
-    SoundCloud.get(`/users/${username}/playlists`)
-        .then((userPlaylists) => {
-            let parsed = parse(userPlaylists);
-            JukeboxStateStore.setPlaylists(parsed);
-            Dispatcher.emit(Events.RESET);
-        });
+export function jumpTo(index) {
+    _loadTrack(index);
+    Dispatcher.emit(Events.PLAY);
 }
 
 export function isPlaying() {
@@ -88,4 +82,9 @@ export function getActiveTrack() {
 
 export function getActivePlaylist() {
     return JukeboxStateStore.getActivePlaylist();
+}
+
+export function setPlaylists(playlists) {
+    JukeboxStateStore.setPlaylists(playlists);
+    Dispatcher.emit(Events.RESET);
 }

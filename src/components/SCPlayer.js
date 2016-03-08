@@ -53,35 +53,13 @@ export let SCPlayer = React.createClass({
         this.setState({ scrubTime: time });
     },
 
-    getBackgroundImage(song) {
-        if (song) {
-            return `url('${song.artwork}')`;
-        }
-
-        return '';
-    },
-
     render() {
         let { activeTrack, isPlaying } = this.props;
         let duration = activeTrack ? activeTrack.duration : 0;
 
         return (
-            <div className=''>
-                <div
-                    ref='albumBg'
-                    className='player-bg'
-                    style={{
-                        backgroundImage: this.getBackgroundImage(this.props.activeTrack)
-                    }}
-                />
-                <div className='overlay'></div>
-
-                <div className='player-main' ref='playerContainer'>
-
-                    <Display
-                        track={activeTrack}
-                        isPlaying={isPlaying}
-                    />
+            <div className='player-container'>
+                <div className='player-main container'>
                     <Controls
                         ready={activeTrack}
                         isPlaying={isPlaying}
@@ -102,7 +80,10 @@ export let SCPlayer = React.createClass({
                         duration={duration / 1000}
                         onScrub={this.onScrub}
                     />
-
+                    <Display
+                        track={activeTrack}
+                        isPlaying={isPlaying}
+                    />
                 </div>
             </div>
         );

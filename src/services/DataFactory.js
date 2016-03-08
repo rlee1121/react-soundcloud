@@ -8,11 +8,12 @@ import * as SoundCloud from './SoundCloudWrapper';
 function trackFactory(track) {
     const id = track.id;
     const title = track.title;
-    const artwork = track.artwork_url;
+    const artwork = track.artwork_url || track.user.avatar_url;
     const genre = track.genre;
     const tags = track.tag_list;
     const username = track.user.username;
     const duration = track.duration;
+    const likedBy = track.likedBy || '';
 
     function getStreamUrl() {
         return SoundCloud.getStreamUrl(id);
@@ -26,16 +27,17 @@ function trackFactory(track) {
         genre,
         tags,
         duration,
-        username
+        username,
+        likedBy
     };
 }
 
 function playlistFactory(playlist) {
     return {
-        id: playlist.id,
-        title: playlist.title,
-        genre: playlist.genre,
-        url: playlist.permalink_url,
+        id: playlist.id || '0',
+        title: playlist.title || 'Default',
+        genre: playlist.genre || '',
+        url: playlist.permalink_url || '',
         tracks: playlist.tracks.map(trackFactory)
     };
 }

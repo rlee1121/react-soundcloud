@@ -1,53 +1,47 @@
 .controls {
     display: flex;
-    order: 2;
 }
 .control-container {
     flex-grow: 1;
     text-align: center;
 }
 .player-control {
-    border: 2px solid white;
-    color: white;
     border-radius: 5px;
-    padding: 5px;
     margin:  0 auto;
     cursor: pointer;
-    height: 40px;
-    width: 40px;
-    border-radius: 40px;
+    height: 42px;
+    width: 42px;
+    // border-radius: 40px;
     position: relative;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 50%;
+    background-size: 66%;
     transition: box-shadow 0.3s;
 }
 
 .player-control:hover {
-    box-shadow: 0 0 10px 0px rgb(180,180,180);
+    // box-shadow: 0 0 10px 0px rgb(180,180,180);
 }
 .player-control:active {
-    border-color: #0BEDED;
+    border-color: $primary-color;
 }
 
 .controls.disabled .player-control {
-    border: 2px solid rgb(100,100,100);
+    // border: 2px solid rgb(100,100,100);
     pointer-events: none;
 }
 
 .player-control.play {
-    background-image: url("../img/play.png");
-
+    background-image: url("../img/play.svg");
 }
 .player-control.pause {
-    background-image: url("../img/pause.png");
-
+    background-image: url("../img/pause.svg");
 }
 .player-control.prev {
-    background-image: url("../img/prev.png");
+    background-image: url("../img/prev.svg");
     float: right;
 }
 .player-control.next {
-    background-image: url("../img/next.png");
+    background-image: url("../img/next.svg");
     float: left;
 }

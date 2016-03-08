@@ -16,10 +16,6 @@ export let Display = React.createClass({
         return '';
     },
 
-    renderPlayingStatus() {
-        return this.props.isPlaying ? 'Now Playing' : 'Paused';
-    },
-
     renderCurrentSong() {
         if (!this.props.track) {
             return (
@@ -29,7 +25,6 @@ export let Display = React.createClass({
         return (
             <div className="song-metadata">
                 <p className="title">{this.props.track.title}</p>
-                <p className="username">{this.props.track.username}</p>
             </div>
         );
     },
@@ -45,10 +40,6 @@ export let Display = React.createClass({
                     }}
                 />
                 <div className="display-info">
-                    <p className="is-playing">
-                        <span className={this.props.isPlaying ? 'record playing' : 'record'}></span>
-                        {this.renderPlayingStatus()}
-                    </p>
                     {this.renderCurrentSong()}
                 </div>
             </div>
